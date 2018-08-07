@@ -1,0 +1,71 @@
+/* pages/components/progress/progress.wxss */
+
+.progress {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 60rpx;
+  position: relative;
+}
+.progress-bg-line {
+  position: absolute;
+  top: 50%;
+  margin-top: -4rpx;
+  height: 8rpx;
+  width: 100%;
+  background: rgba(0,0,0,.3);
+}
+.progress-line {
+  position: absolute;
+  top: 50%;
+  margin-top: -4rpx;
+  height: 8rpx;
+  background-color: #ffcd32;
+}
+
+.ball-box {
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  width: 60rpx;
+  height: 60rpx;
+  transform: translateX(-16px);
+}
+
+.ball {
+  width: 20rpx;
+  height: 20rpx;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #ffcd32;
+}
+
+.song-time {
+  color: #fff;
+  font-size: 12px;
+  -ms-flex: 0 0 70rpx;
+  flex: 0 0 70rpx;
+  line-height: 30px;
+}
+
+.song-time-start {
+  text-align: left;
+}
+
+.song-time-end {
+  text-align: right;
+}
+.progress-bar-inner {
+  position: relative;
+  top: 13px;
+  height: 4px;
+  width: 100%;
+  background: rgba(0,0,0,.3);
+}

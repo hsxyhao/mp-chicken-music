@@ -1,0 +1,18 @@
+<!--pages/components/progress/progress.wxml-->
+<view class='progress'>
+  <text class='song-time song-time-start'>{{current}}</text>
+  <view id='progress_bar' class='progress-bar'>
+    <view class='progress-bg-line'></view>
+    <view class='progress-line' style='width:{{curTime*100/durTime}}%'></view>
+    <view class='ball-box'
+        bindtouchcancel='_cancel' 
+        bindtouchend='_end'
+        bindtouchstart='_start' 
+        bindtouchmove='_move' 
+        style='left:{{curTime*100/durTime}}%'>
+      <view class='ball'></view>
+    </view>
+  </view>
+  <text class='song-time song-time-end'>{{duration}}</text>
+</view>
+

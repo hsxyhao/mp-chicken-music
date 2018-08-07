@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view class='wrapper'>
+  <scroll-view 
+    scroll-x='{{false}}'
+    scroll-y='{{true}}'
+    class="index">
+    <swiper 
+      class='swiper'
+      indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" 
+      interval="{{interval}}" 
+      circular="{{circular}}"
+      duration="{{duration}}">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='music-list'>
+      <view class='block-title'>热门歌单推荐</view>
+      <view class='musics'>
+        <view class='music-item' wx:for="{{musics}}">
+          <image class='music-img' src='{{item.img}}'></image>
+          <view class='music-info'>
+            <view class='music-text-singer'>{{item.singer}}</view>
+            <view class='music-text-desc'>{{item.desc}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

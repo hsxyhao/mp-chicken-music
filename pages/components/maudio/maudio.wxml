@@ -1,0 +1,50 @@
+<!--pages/components/maudio/maudio.wxml-->
+<view class='audio-component'>
+  <view class='mini-audio'>
+    <view class='mini-audio-left'>
+      <view class='img-wrapper'>
+        <image id='song_img' 
+              class='song-img' 
+              src='{{song.img}}' 
+              bindtap='showPlay'  
+              src='{{song.image}}'></image>
+      </view>
+      <view class='song-info'>
+        <text class='song-name'>{{song.name}}</text>
+        <text class='singer-name'>{{song.singer}}</text>
+      </view>
+    </view>
+    <view class='mini-audio-right'>
+      <view bindtap='toggle' class='{{play?"icon-pause-mini":"icon-play-mini"}}'></view>
+      <view bindtap='show' class='icon-playlist'></view>
+    </view>
+  </view>
+  <view class='playlist' bindtap='hide' style='{{show?"":"display:none;z-index:0;"}}'>
+    <view class='wrapper-temp'></view>
+    <view class='list-wrapper' animation='{{wrapper}}' id='list_wrapper'>
+        <view class='playlist-title'>
+          <view class='title-left'>
+            <view class='{{playMode.font}}' catchtap='_chageMode'></view>
+            <text class='play-mode-text'>{{playMode.desc}}</text>
+          </view>
+          <text class='icon-clear'></text>
+        </view>
+        <view class='playlist-music'>
+          <view wx:for="{{list}}" class='playlist-music-item'>
+            <view class='icon-mini {{item.isPlay?"icon-play":""}}'></view>
+            <text class='text'>{{item.name}}</text>
+            <view class='icon-mini {{item.isLove?"icon-favorite":"icon-not-favorite"}}'></view>
+            <view class='icon-close'></view>
+          </view>
+        </view>
+        <view class='playlist-add'>
+          <view class='add-wrapper'>
+            <view class='icon-add'></view>
+            <text>添加歌曲到列表</text>
+          </view>
+        </view>
+        <view class='playlist-close'>{{'关闭'}}</view>
+      </view>
+  </view>
+</view>
+

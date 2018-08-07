@@ -1,0 +1,8 @@
+<!--pages/components/header/header.wxml-->
+<view class='com-header'>
+  <view class='header-top'>
+    <view class='header-img'></view>
+    <view class='header-text'>{{'Chiecken Music'}}</view>
+  </view>
+  <view class='header-bottom'></view>
+</view>

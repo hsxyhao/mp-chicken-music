@@ -1,0 +1,8 @@
+<!--pages/test/test.wxml-->
+<view class='app-view'>
+  <header></header>
+  <nav id='nav' bind:switchEvent="switchContainer" style='position:relative;z-index:180;'></nav>
+  <view class='container-box'>
+    <container id="container" bind:moveEvevnt="moveEvevnt"></container>
+  </view>
+</view>

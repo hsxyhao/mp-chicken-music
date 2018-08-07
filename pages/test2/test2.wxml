@@ -1,0 +1,4 @@
+<!--pages/test2/test2.wxml-->
+<view>
+  <add-song></add-song>
+</view>

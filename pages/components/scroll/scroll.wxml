@@ -1,0 +1,7 @@
+<!--pages/components/scroll/scroll.wxml-->
+<view class="wrapper">
+    <view class="scroller" bindtouchstart="_start" bindtouchmove="_move" bindtouchend="_end"
+          style="width:{{scrollWidth}}px;transition: transform {{duration/1000}}s;transform:translateZ(0) translateX({{distX}}px)">
+        <view wx:key="item" wx:for="{{slideBgColors}}" class="slide" style="width:{{100+index*10}}px;background:{{item}}"></view>
+    </view>
+</view>

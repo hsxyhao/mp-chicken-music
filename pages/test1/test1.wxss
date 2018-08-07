@@ -1,0 +1,33 @@
+.page {
+  height: 100%;
+  overflow: hidden;
+}
+.rotate { 
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #FFF;
+  animation: lanimation 2.5s linear infinite;
+  -webkit-animation-play-state:paused;
+}
+
+.start {
+  animation: lanimation 2.5s linear infinite;
+  -webkit-animation-play-state:running !important;
+}
+
+.paused {
+  animation: lanimation 2.5s linear infinite;
+  -webkit-animation-play-state:paused;
+}
+
+@-webkit-keyframes lanimation { 
+  from {
+    transform: rotate(0deg);
+  } 
+  to {
+    transform: rotate(360deg);
+  } 
+} 

@@ -1,0 +1,38 @@
+<!--pages/components/sdetails/sdetails.wxml-->
+<view class='details' animation='{{detailsAnima}}'>
+  <view class='deatils-header'>
+    <view class='title'>{{name}}</view>
+    <view class='back'  bindtap='hide'>
+      <view class='icon-back'></view>
+    </view>
+  </view>
+  <view id='details_img' class='details-img' animation='{{scaleAnima}}' style='background-image: url("{{avatar}}"); padding-top: 70%;height: 0px;'>
+    <view class='play-wrapper'>
+      <view class='play'>
+        <view class='icon-play'></view>
+        <text class='text'>{{'随机播放全部'}}</text>
+      </view>
+    </view>
+    <view class='filter'></view>
+  </view>
+  <view class='scroll-box' animation='{{translateAnima}}' style='top:{{height}}px;z-index:{{scrollZ}};'>
+    <scroll-view 
+        class='scroll'
+        scroll-y='{{isScroll}}'
+        bindscroll='scroll'
+        scroll-with-animation='{{true}}'>
+      <view class='details-item' wx:for="{{list}}"data-i='{{index}}' bindtap='playMusic'>
+        <view class='top-list' style='{{details_mode==2?"":"display:none"}}'>
+          <view class='icon-top'>
+            <view wx:if="{{index < 3}}" class='icon-num-img icon-num-{{index}}'></view>
+            <view wx:else class='icon-num-normal'>{{index+1}}</view>
+          </view>
+        </view>
+        <view>
+          <view class='details-title'>{{item.name}}</view>
+          <view class='details-singers'>{{item.singer}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

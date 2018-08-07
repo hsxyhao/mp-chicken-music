@@ -1,0 +1,25 @@
+/* pages/components/nav/nav.wxss */
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #222;
+  height: 88rpx;
+  font-size: 14px;
+}
+
+.nav-item {
+  flex: 1;
+  text-align: center;
+}
+
+.nav .nav-text {
+  padding-bottom: 5px;
+  color: hsla(0,0%,100%,.5);
+}
+
+.nav-selected {
+  color: #ffcd32 !important;
+  border-bottom: 4rpx solid #ffcd32;
+}

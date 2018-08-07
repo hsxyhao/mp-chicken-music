@@ -1,0 +1,4 @@
+<!--pages/test1/test1.wxml-->
+<view class='page'>
+  <sdetails></sdetails>
+</view>

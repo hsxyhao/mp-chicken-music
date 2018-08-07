@@ -1,0 +1,22 @@
+page {
+  height: 100%;
+  overflow: hidden;
+}
+.app-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container-box {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  z-index: 180;
+}
+
+.mini-audio {
+  height: 120rpx;
+  z-index: 450;
+}

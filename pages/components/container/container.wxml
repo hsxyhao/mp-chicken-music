@@ -1,0 +1,145 @@
+<!--pages/components/container/container.wxml-->
+<view class='container' animation='{{move}}' bindtouchstart='touchstart' bindtouchmove='touchmove' bindtouchend='touchend'>
+  <view class='wrapper'>
+    <scroll-view 
+      scroll-x='{{false}}'
+      scroll-y='{{true}}'
+      class="index">
+      <swiper 
+        class='swiper'
+        indicator-dots="{{index.indicatorDots}}"
+        indicator-color="#222"
+        indicator-active-color="#FFCD32"
+        autoplay="{{index.autoplay}}" 
+        interval="{{index.interval}}" 
+        circular="{{index.circular}}"
+        duration="{{index.duration}}">
+        <block wx:for="{{index.sowingWap}}">
+          <swiper-item>
+            <image src="{{item.picUrl}}" class="slide-image" width="355" height="150"/>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='music-list'>
+        <view class='block-title'>热门歌单推荐</view>
+        <view class='musics'>
+          <view class='music-item' bindtap='recomDetail' data-i='{{i}}' wx:for-index='i' wx:for="{{index.songList}}">
+            <image class='music-img' data-src='{{item.imgurl}}' src='{{item.imgurl}}'></image>
+            <view class='music-info'>
+              <view class='music-text-singer'>{{item.creator.name}}</view>
+              <view class='music-text-desc'>{{item.dissname}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class='wrapper'>
+    <view class='singer'>
+      <scroll-view 
+            bindtouchstart='touchScroll'
+            bindscroll='singerScroll'
+            scroll-into-view='list_singer_{{singer.scrollView}}' 
+            scroll-x='{{false}}' 
+            scroll-y='true' 
+            class='list-view'>
+        <view class='list-item' wx:for="{{singer.singers}}">
+          <view id='list_singer_{{index}}' class='list-title'>{{item.title}}</view>
+          <view class='singer-item' 
+                data-name='{{item.name}}' 
+                data-id='{{item.id}}' 
+                bindtap='singerDetails'  
+                wx:for="{{item.items}}" 
+                wx:for-item="item">
+                <view class='singer-img-box'>
+                  <image class='singer-img' src='{{item.avatar}}'></image>
+                </view>
+            <text class='singer-text'>{{item.name}}</text>
+          </view>
+        </view>
+      </scroll-view>
+      <view  class='right'>
+        <text catchtouchend='rightClick' data-index='{{index}}'  wx:for="{{singer.chars}}" 
+            class='text {{index==singer.scrollIndex?"text-selected":""}}'>{{item}}</text>
+      </view>
+      <view style='{{singer.fixedDisplay?"":"opacity:0;"}}' animation='{{singer.fixedAni}}' class='fixed-title list-title'>{{singer.fixedTitle}}</view>
+    </view>
+  </view>
+  <view class='wrapper'>
+    <scroll-view 
+        scroll-x='{{false}}'
+        scroll-y='{{true}}'
+        class="top">
+        <view class='scroll-box-wrapper'>
+          <view class='top-list-item ' bindtap='topListDetail' data-i='{{index}}' wx:for='{{top.tops}}'>
+            <view class='top-img'>
+              <image src='{{item.picUrl}}'></image>
+            </view>
+            <view class='singer-list'>
+              <text class='singer-list-item singer-list-title'>{{item.topTitle}}</text>
+              <text class='singer-list-item' wx:for='{{item.songList}}' wx:for-item="list_item">{{index+1}} {{list_item.songname}}-{{list_item.singername}}</text>
+            </view>
+          </view>
+        </view>
+    </scroll-view>
+  </view>
+  <view class='wrapper'>
+    <view class='search'>
+      <view class='search-box-wrapper'>
+        <view class='search-box'>
+          <text class='icon-search' catchtap='searchMusic'></text>
+          <input class='input-box' 
+                  type='text' 
+                  bindinput='input' 
+                  confirm-type='search'
+                  value='{{search.query}}'
+                  bindconfirm='searchMusic'
+                  placeholder='搜索歌曲、歌手'></input>
+          <text class='icon-dismiss' catchtap='clear' style='{{search.query===""?"display:none;":""}}'></text>
+        </view>
+      </view>
+      <view class='shortcut-wrapper' style='z-index:10'>
+        <view class='shortcut-wrapper-item'>
+          <view class='title'>{{'热门搜索'}}</view>
+          <view class='search-content'>
+            <text class='search-text' 
+                  catchtap='searchClick'
+                  data-val='{{item.k}}' 
+                  wx:for='{{search.hotKeys}}'>{{item.k}}</text>
+          </view>
+        </view>
+        <view class='shortcut-wrapper-item'>
+          <view class='title clear'>
+            <text class=''>{{'搜索历史'}}</text>
+            <text class='icon-clear' bindtap='deleteAll'></text>
+          </view>
+          <view class='history-content'>
+            <view class='history-item' wx:for='{{search.history}}'>
+              <text class='history-text' 
+                    data-val='{{item.name}}' 
+                    catchtap='searchClick'>{{item.name}}</text>
+              <text class='icon-close' data-k='{{item.key}}' catchtap='close'></text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='shortcut-wrapper' style='{{search.query===""?"":"z-index:100;"}}'>
+        <scroll-view class='search-scroll' scroll-y='{{true}}'>
+            <view wx:if='{{search.zhida!=null}}' class='search-result-item' 
+                  data-i='{{index}}' 
+                  catchtap='zhidaClick' >
+              <view class='icon-user search-icon-music'></view>
+              <view class='result-text'>{{search.zhida.singername}}</view>
+            </view>
+            <view class='search-result-item' 
+                  data-i='{{index}}' 
+                  catchtap='resultClick' 
+                  wx:for='{{search.searches}}'>
+              <view class='icon-music search-icon-music'></view>
+              <view class='result-text'>{{item.name}}-{{item.singer}}</view>
+            </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

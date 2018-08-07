@@ -1,0 +1,22 @@
+<view class='add-song'>
+  <view class='add-header'>
+    <view class='header-text'>{{'添加歌曲到列表'}}</view>
+    <view class='icon-no'></view>
+  </view>
+  <view class='search-box-wrapper'>
+    <view class='search-box'>
+      <view class='icon-search'></view>
+      <input class='search-input' placeholder="搜索歌曲"></input>
+      <view class='icon-search'></view>
+    </view>
+  </view>
+  <view class='shortcut'>
+    <view class='shortcut-item '>{{'最近播放'}}</view>
+    <view class='shortcut-item shortcut-item-selected'>{{'搜索历史'}}</view>
+  </view>
+  <view class='result-list'>
+    <scroll-view class='result-list-scroll'>
+      <view>{{'sss'}}</view>
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,53 @@
+<!--pages/components/play/play.wxml-->
+<!--pages/play/play.wxml-->
+<view class='paly' style='{{showPlay?"":"opacity:0;z-index:0;"}}' animation="{{animations.back}}">
+  <view class='mask'>
+    <image class='mask-img' src='{{song.image}}'></image>
+  </view>
+  <view class='content'>
+    <view class='header' animation="{{animations.top}}" >
+      <text class='song-name'>{{song.name}}</text>
+      <text class='song-singer'>{{song.singer}}</text>
+      <text class='icon-back' bindtap='back'></text>
+    </view>
+    <view class='body'bindtouchstart='touchstart' bindtouchmove='touchmove'>
+      <view class='relative'>
+        <view class='body-style body-style-one' style='{{cssStyle}}'>
+          <view class='body-img' animation='{{animations.center}}' id='song_img'>
+            <image class='song-image' 
+                  style="animation-play-state:{{isPaying?'running':'paused'}}" 
+                  src='{{song.image}}'>
+            </image>
+          </view>
+          <text class='song-lyric'>{{song.lyric.lines[lineNum].txt}}</text>
+        </view>
+        <view class='body-style body-style-two' style='{{transform}}'>
+          <view class='lyric-wrapper'>
+            <text class="lyric-text" wx:for="{{song.lyric.lines}}">{{item.txt}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='footer' animation='{{animations.bottom}}'>
+      <view class='dot-index'>
+        <view class='dot-index-item {{allLyric?"":"index-selected"}}'></view>
+        <view class='dot-index-item {{allLyric?"index-selected":""}}'></view>
+      </view>
+      <view class='progress-box'>
+        <progress id='progress'
+                current='{{current}}' 
+                duration='{{duration}}' 
+                durTime='{{song.duration}}' 
+                curTime='{{curTime}}'
+                bind:seekEvent='_seek'></progress>
+      </view>
+      <view class='edit'>
+        <text class="icon {{playMode.font}}" catchtap='_chageMode'></text>
+        <text class='icon icon-prev' catchtap='_prev'></text>
+        <text class="icon {{isPlaying?'icon-pause':'icon-play'}}" catchtap='_toggle'></text>
+        <text class='icon icon-next' catchtap='_next'></text>
+        <text class='icon {{isLike?"icon-favorite":"icon-not-favorite"}}' bindtap='like'></text>
+      </view>
+    </view>
+  </view>
+</view>

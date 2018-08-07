@@ -1,0 +1,12 @@
+.wrapper{
+    width:100%;
+    height:300px;
+    overflow: hidden;
+}
+.scroller{
+    height:300px;
+}
+.scroller .slide{
+    height:300px;
+    float:left;
+}

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "mini-audio": "../components/maudio/maudio"
+  }
+}

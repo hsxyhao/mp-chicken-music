@@ -1,0 +1,7 @@
+<!--pages/components/nav/nav.wxml-->
+<view class='nav'>
+  <view class='nav-item' catchtap='switch' wx:for="{{tabs}}" data-index='{{index}}'>
+    <text class='nav-text {{index==current?"nav-selected":""}}'>{{item}}</text>
+    <view class='nav-line'></view>
+  </view>
+</view>

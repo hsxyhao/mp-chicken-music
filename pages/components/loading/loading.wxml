@@ -1,0 +1,11 @@
+<!--pages/components/loading/loading.wxml-->
+<view class='loader' style='{{show?"":"display:none"}}'>
+  <view class='loader-inner line-scale'>
+    <view></view>
+    <view></view>
+    <view></view>
+    <view></view>
+    <view></view>
+  </view>
+  <view class='loader-title'>正在载入</view>
+</view>
