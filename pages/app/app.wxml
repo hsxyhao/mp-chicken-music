@@ -29,13 +29,14 @@
       bind:playSeekEvevnt='playSeek'
       bind:toggleEvent="togglePlay"></play>
   <view class='mini-audio'style='{{mini?"":"display:none"}}'>
-    <mini-audio 
-      list='{{playlist.list}}'
-      play='{{state}}' 
-      playMode='{{playlist.playMode}}'
-      song='{{song}}'
-      bind:showPlayEvent='showPlayPage'
-      bind:toggleEvent='togglePlay' 
-      bind:changeModeEvent="changeMode"></mini-audio>
+  <mini-audio 
+    list='{{playlist.list}}'
+    play='{{state}}' 
+    playMode='{{playlist.playMode}}'
+    song='{{song}}'
+    bind:switchSongEvent='switchSong'
+    bind:showPlayEvent='showPlayPage'
+    bind:toggleEvent='togglePlay' 
+    bind:changeModeEvent="changeMode"></mini-audio>
   </view>
 </view>

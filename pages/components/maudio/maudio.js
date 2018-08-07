@@ -89,6 +89,14 @@ Component({
     toggle: function () {
       this.triggerEvent("toggleEvent")
     },
+    switchSong: function (e) {
+      let i = e.currentTarget.dataset.i;
+      let song = this.data.list[i];
+      if (!song||song.mid === this.data.song.mid) {
+        return;
+      }
+      this.triggerEvent("switchSongEvent", { song: song})
+    },
     getLyric: function (index) {
       return lyrics[index];
     },

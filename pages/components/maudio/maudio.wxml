@@ -30,8 +30,8 @@
           <text class='icon-clear'></text>
         </view>
         <view class='playlist-music'>
-          <view wx:for="{{list}}" class='playlist-music-item'>
-            <view class='icon-mini {{item.isPlay?"icon-play":""}}'></view>
+          <view wx:for="{{list}}" catchtap='switchSong' data-i='{{index}}' class='playlist-music-item'>
+            <view class='icon-mini {{item.mid===song.mid?"icon-play":""}}'></view>
             <text class='text'>{{item.name}}</text>
             <view class='icon-mini {{item.isLove?"icon-favorite":"icon-not-favorite"}}'></view>
             <view class='icon-close'></view>

@@ -5,9 +5,6 @@ var audio = null;
 function _initAudio() {
   audio = wx.createInnerAudioContext();
   audio.autoplay = true;
-  audio.onPlay(() => {
-    console.log('开始播放')
-  })
 }
 function _bindEvent(option) {
   // audio.onPlay = option && option.onPlay;

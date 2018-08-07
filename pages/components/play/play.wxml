@@ -1,6 +1,6 @@
 <!--pages/components/play/play.wxml-->
 <!--pages/play/play.wxml-->
-<view class='paly' style='{{showPlay?"":"opacity:0;z-index:0;"}}' animation="{{animations.back}}">
+<view class='paly' style='{{showPlay?"opacity:1;":"opacity:0;z-index:0;"}}' animation="{{animations.back}}">
   <view class='mask'>
     <image class='mask-img' src='{{song.image}}'></image>
   </view>
@@ -13,13 +13,14 @@
     <view class='body'bindtouchstart='touchstart' bindtouchmove='touchmove'>
       <view class='relative'>
         <view class='body-style body-style-one' style='{{cssStyle}}'>
-          <view class='body-img' animation='{{animations.center}}' id='song_img'>
+          <view class='body-img' id='body_img' animation='{{animations.center}}' id='song_img'>
             <image class='song-image' 
                   style="animation-play-state:{{isPaying?'running':'paused'}}" 
                   src='{{song.image}}'>
             </image>
           </view>
-          <text class='song-lyric'>{{song.lyric.lines[lineNum].txt}}</text>
+          <text class='song-lyric'>{{"dsadsadasdas"}}</text>
+          <!-- <text class='song-lyric'>{{song.lyric.lines[lineNum].txt}}</text> -->
         </view>
         <view class='body-style body-style-two' style='{{transform}}'>
           <view class='lyric-wrapper'>

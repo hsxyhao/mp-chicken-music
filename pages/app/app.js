@@ -3,6 +3,7 @@ import { Singer } from '../../domain/singer.js'
 import { createSong, getMusicVKey} from '../../domain/song.js'
 import { Audio } from '../../utils/mini_audio.js'
 import { PLAYMODE, PlayList, chageMode } from '../../utils/playlist.js'
+import { Lyric } from '../../utils/lyric-parser.js'
 
 Page({
 
@@ -31,7 +32,7 @@ Page({
     this.details = this.selectComponent("#details");
     this.play = this.selectComponent("#play_music");
     this._initAudio();
-    this._bindTimeUpdate();
+    this._bindAudioEvent();
     this.setData({
       'playlist': new PlayList()
     })
@@ -39,7 +40,7 @@ Page({
   _initAudio: function () {
     this.audio = new Audio();
   },
-  _bindTimeUpdate: function () {
+  _bindAudioEvent: function () {
     var that = this;
     let play = this.play;
     this.audio.context.onTimeUpdate(function () {
@@ -58,6 +59,12 @@ Page({
         'state': true
       });
     });
+    this.audio.context.onPlay(function () {
+
+    })
+    this.audio.context.onStop(function () {
+
+    })
   },
   topListDetail: function (e) {
     console.log(e)
@@ -162,6 +169,9 @@ Page({
       }
     })
   },
+  _lyricInit: function () {
+    
+  },
   playMusic: function (e) {
     let song = e.detail.song;
     if (this.data.song && this.data.song.mid === song.mid) {
@@ -169,10 +179,10 @@ Page({
       return;
     }
     this.setData({
-      'song': song,
       'mini': true, 
       'state': true
     });
+    this._lyricInit()
     let playlist = this.data.playlist;
     if (playlist.addSong(song)) {
       playlist.updatewWxml(this,'playlist.list');
@@ -202,6 +212,13 @@ Page({
     this.setData({
       'playlist.playMode': mode
     })
+  },
+  switchSong: function (e) {
+    let song = e.detail.song;
+    this.setData({
+      'song': song
+    })
+    this._playMusic(song,false)
   },
   prev: function () {
 

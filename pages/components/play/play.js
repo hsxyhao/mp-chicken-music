@@ -54,8 +54,10 @@ Component({
     let query = promise(that, 'song_img');
     let element = null;
     this.process = this.selectComponent("#progress");
-    this.width = wx.getSystemInfoSync().windowWidth * wx.getSystemInfoSync().pixelRatio
-    this.height = wx.getSystemInfoSync().windowHeight * wx.getSystemInfoSync().pixelRatio
+    let info = wx.getSystemInfoSync();
+    this.width = info.windowWidth;
+    this.height = info.windowHeight; 
+    this.pixelRatio = info.pixelRatio;
   },
   /**
    * 组件的方法列表
@@ -98,12 +100,12 @@ Component({
       bottom.translate3d(0, -100, 0).step();
       bottom.translate3d(0, 0, 0).step();
 
-      let back = this._createAnimation(400, 0);
+      let back = this._createAnimation(500, 0);
       back.opacity(0).step();
 
       const { x, y, scale } = this._getPosAndScale();
 
-      let center = this._createAnimation(500, 0,'linear');
+      let center = this._createAnimation(300, 0);
       center.translate3d(-x, y, 0).scale(scale).step();
       this.setData({
         animations: {
@@ -123,7 +125,7 @@ Component({
         that.setData({
           showPlay: false
         })
-      }, 500)
+      }, 600)
     },
     _createAnimation(duration, delay, timing) {
       return wx.createAnimation({
@@ -133,16 +135,20 @@ Component({
       });
     },
     _getPosAndScale: function () {
+      if (this.pos) {
+        return this.pos;
+      }
       const targetWidth = 40;
-      const sourceWidth = 540;
+      const sourceWidth = 270;
       const left = 20;
-      const targetTop = 617;
-      const sourceTop = 101;
-      return {
-        x: this.width / 2- left ,
-        y: this.height - sourceTop - this.width / 2 - sourceTop,
+      const bottom = 25;
+      const top = 120;
+      this.pos = {
+        x: ((this.width - targetWidth) / 2 - left) ,
+        y: (this.height - bottom - sourceWidth / 2 - targetWidth / 2 - top) ,
         scale: targetWidth / sourceWidth
       } 
+      return this.pos;
     },
     show: function () {
       this.setData({
@@ -155,32 +161,22 @@ Component({
       bottom.translate3d(0, -200, 0).step();
 
       //背景
-      let back = this._createAnimation(400,0);
+      let back = this._createAnimation(0,0);
       back.opacity(1).step();
 
       const { x, y, scale } = this._getPosAndScale();
-      let center = this._createAnimation(0, 0);
-      center.translate3d(-x, y, 0).scale(scale).step();
-      this.setData({
-        animations: {
-          center: center.export()
-        }
-      })
-      center = this._createAnimation(500, 0, 'linear');
+      let center = this._createAnimation(500, 0);
       center.translate3d(0, 0, 0).scale(1.05).step();
-      center.translate3d(0, 0, 0).scale(1).step();
-      this.setData({
-        animations: {
-          center: center.export()
-        }
-      })
+      center.translate3d(0, 0, 0).scale(1).step({
+        duration: 300
+      });
 
       this.setData({
         showPlay: true,
         animations: {
           top: top.export(),
-          bottom: bottom.export(),
-          back: back.export()
+          center: center.export(),
+          bottom: bottom.export()
         }
       });
     },
