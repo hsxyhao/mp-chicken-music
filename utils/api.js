@@ -10,7 +10,8 @@ const URL = {
   top_list_details: `${HOST}/getTopListDetails`,
   hot_keys: 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg',
   search_music: `${HOST}/searchMusic`,
-  v_key: `${HOST}/getSongVkey`
+  v_key: `${HOST}/getSongVkey`,
+  lyric: `${HOST}/getLyric`
 }
 
 const METHOD = {
@@ -183,6 +184,19 @@ const search = (query, page, zhida, perpage)=> {
   return ajax(URL.search_music, param)
 }
 
+const getLyric = (mid) => {
+  const param = Object.assign({}, PARAM, {
+    songmid: mid,
+    platform: 'yqq',
+    hostUin: 0,
+    needNewCode: 0,
+    categoryId: 10000000,
+    pcachetime: +new Date(),
+    format: 'json'
+  })
+  return ajax(URL.lyric, param)
+}
+
 module.exports = {
   sowingWap: sowingWap,
   songList: songList,
@@ -193,6 +207,7 @@ module.exports = {
   topListDetails: topListDetails,
   hotKeys: hotKeys,
   songVKey: songVKey,
-  search: search
+  search: search,
+  getLyric: getLyric
 }
 

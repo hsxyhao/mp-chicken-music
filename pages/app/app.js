@@ -3,7 +3,6 @@ import { Singer } from '../../domain/singer.js'
 import { createSong, getMusicVKey} from '../../domain/song.js'
 import { Audio } from '../../utils/mini_audio.js'
 import { PLAYMODE, PlayList, chageMode } from '../../utils/playlist.js'
-import { Lyric } from '../../utils/lyric-parser.js'
 
 Page({
 
@@ -67,7 +66,6 @@ Page({
     })
   },
   topListDetail: function (e) {
-    console.log(e)
     let detail = e.detail.details;
     this.setData({
       avatar: detail.picUrl,
@@ -167,10 +165,11 @@ Page({
       if (show) {
         this.play.show();
       }
+      if (song && !song.lyric) {
+        this._lyricInit(song)
+        console.log(song)
+      }
     })
-  },
-  _lyricInit: function () {
-    
   },
   playMusic: function (e) {
     let song = e.detail.song;
@@ -182,7 +181,6 @@ Page({
       'mini': true, 
       'state': true
     });
-    this._lyricInit()
     let playlist = this.data.playlist;
     if (playlist.addSong(song)) {
       playlist.updatewWxml(this,'playlist.list');
@@ -194,6 +192,10 @@ Page({
   },
   playSeek: function (e) {
     this.audio.seek(Math.floor(e.detail.t))
+    this.audio.play();
+    this.setData({
+      'state': true
+    })
   },
   togglePlay: function (e) {
     let state = !this.data.state;

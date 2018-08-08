@@ -1,6 +1,9 @@
 // pages/components/play/play.js
 import { formatMusicTime, promise } from '../../../utils/util.js'
 import { PLAYMODE } from '../../../utils/playlist.js'
+import { Lyric } from '../../../utils/lyric-parser.js'
+import { getLyric } from '../../../utils/api.js'
+import { Base64 } from '../../../utils/base64.js'
 
 Component({
   externalClasses: ['icon-random', 'icon-sequence','icon-loop'],
@@ -35,6 +38,7 @@ Component({
      */
     allLyric: false,
     lineNum: 0,
+    text: '加载歌词...',
     isLike: false,
     isTouch: false,
     posX: 0,
@@ -46,8 +50,7 @@ Component({
       bottom: {},
       back: {},
       center: {}
-    },
-    sourceImage: null
+    }
   },
   ready: function(){
     var that = this;
@@ -179,6 +182,43 @@ Component({
           bottom: bottom.export()
         }
       });
+      if (this.data.song && !this.data.song.lyric) {
+        this._lyricInit(this.data.song)
+      } else {
+        let song = this.data.song;
+        song.lyric.seek(this.data.curTime * 1000);
+        !this.data.isPlaying && song.lyric.stop();
+      }
+    },
+    _lyricInit: function (song) {
+      var that = this;
+      getLyric(song.mid).then((res) => {
+        var ret = res;
+        if (typeof ret === 'string') {
+          var reg = /^\w+\(({[^()]+})\)$/ // 用来匹配 jsonp 字符串
+          var matches = ret.match(reg)
+          if (matches) {
+            ret = JSON.parse(matches[1])
+            let lyricStr = Base64.decode(ret.lyric)
+            let lyric = new Lyric(lyricStr, function ({ lineNum, txt }) {
+              if (that.data.allLyric) {
+                that.setData({
+                  'lineNum': lineNum
+                })
+              }
+              that.setData({
+                'text': txt
+              })
+            })
+            that.setData({
+              'song.lyric': lyric
+            })
+            if (that.data.isPlaying) {
+              that.data.song.lyric.play(that.data.curTime * 1000)
+            }
+          }
+        }
+      })
     },
     setPayingState: function (val) {
       this.setData({
@@ -200,8 +240,19 @@ Component({
         current: timeStr
       });
     },
+    _progressMove: function (e) {
+      let t = e.detail.t;
+      let lyric = this.data.song && this.data.song.lyric
+      if (lyric) {
+        lyric.seek(t * 1000);
+      }
+    },
     _seek: function (e) {
       let t = e.detail.t;
+      let lyric = this.data.song && this.data.song.lyric
+      if (lyric) {
+        lyric.seek(t * 1000);
+      }
       this.triggerEvent('playSeekEvevnt', { t: t });
     },
     lineNumUpdate: function (val) {
@@ -220,6 +271,15 @@ Component({
     },
     _toggle: function () {
       this.triggerEvent("toggleEvent")
+      let lyric = this.data.song && this.data.song.lyric
+      if (!lyric) {
+        return;
+      }
+      if (this.data.isPlaying) {
+        lyric.play(this.data.curTime * 1000)
+      } else {
+        lyric.stop()
+      }
     }
   }
 })

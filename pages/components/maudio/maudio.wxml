@@ -19,7 +19,7 @@
       <view bindtap='show' class='icon-playlist'></view>
     </view>
   </view>
-  <view class='playlist' bindtap='hide' style='{{show?"":"display:none;z-index:0;"}}'>
+  <view class='playlist' animation='{{maskWrapper}}' bindtap='hide' style='{{show?"opacity:0;":"display:none;z-index:0;"}}'>
     <view class='wrapper-temp'></view>
     <view class='list-wrapper' animation='{{wrapper}}' id='list_wrapper'>
         <view class='playlist-title'>

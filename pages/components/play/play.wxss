@@ -45,6 +45,8 @@
 }
 
 .song-name {
+  width: 70%;
+  margin: 0 auto;
   line-height: 40px;
   text-align: center;
   text-overflow: ellipsis;
@@ -77,7 +79,7 @@
   height: 100%;
 }
 
-.body-style {
+.body-style-one {
   position: absolute;
   top: 0;
   left: 0;
@@ -89,8 +91,15 @@
 }
 
 .body-style-two {
+  position: absolute;
   z-index: 100;
   left: 100%;
+  bottom: 320rpx;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .lyric-wrapper {
@@ -100,11 +109,21 @@
   overflow: hidden;
 }
 
+.lyric-scroll {
+  height: 100%;
+  width: 100%;
+}
+
 .lyric-text {
   display: block;
   line-height: 32px;
   color: hsla(0,0%,100%,.5);
   font-size: 14px;
+  transition: color .2s linear;
+}
+
+.lyric-text-selected {
+  color: #fff;
 }
 
 .body-img {
@@ -141,7 +160,7 @@
   text-align: center;
   height: 20px;
   line-height: 20px;
-  font-size: 22px;
+  font-size: 16px;
   color: hsla(0,0%,100%,.5);
 }
 

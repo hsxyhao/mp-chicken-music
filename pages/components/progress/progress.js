@@ -79,6 +79,7 @@ Component({
         curTime: newTime,
         current: formatMusicTime(newTime)
       })
+      this.triggerEvent('moveEvent', { t: newTime})
     },
     query: function (callback) {
       var that = this;

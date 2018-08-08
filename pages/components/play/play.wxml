@@ -12,19 +12,28 @@
     </view>
     <view class='body'bindtouchstart='touchstart' bindtouchmove='touchmove'>
       <view class='relative'>
-        <view class='body-style body-style-one' style='{{cssStyle}}'>
+        <view class='body-style-one' style='{{cssStyle}}'>
           <view class='body-img' id='body_img' animation='{{animations.center}}' id='song_img'>
             <image class='song-image' 
                   style="animation-play-state:{{isPaying?'running':'paused'}}" 
                   src='{{song.image}}'>
             </image>
           </view>
-          <text class='song-lyric'>{{"dsadsadasdas"}}</text>
-          <!-- <text class='song-lyric'>{{song.lyric.lines[lineNum].txt}}</text> -->
+          <!-- <text class='song-lyric'>{{song.lyric.lines}}</text> -->
+          <text class='song-lyric'>{{text}}</text>
         </view>
-        <view class='body-style body-style-two' style='{{transform}}'>
+        <view class='body-style-two' style='{{transform}}'>
           <view class='lyric-wrapper'>
-            <text class="lyric-text" wx:for="{{song.lyric.lines}}">{{item.txt}}</text>
+            <scroll-view 
+                scroll-into-view='lyrics-{{lineNum<7?"-1":lineNum-7}}' 
+                class='lyric-scroll' 
+                scroll-with-animation='{{true}}'
+                scroll-y='{{true}}'>
+              <text id='lyrics-{{index}}' 
+                  class="lyric-text {{lineNum===index?'lyric-text-selected':''}}" 
+                  wx:if='song.lyric.lines.length!==0' 
+                  wx:for="{{song.lyric.lines}}">{{item.txt}}</text>
+            </scroll-view>
           </view>
         </view>
       </view>
@@ -40,6 +49,7 @@
                 duration='{{duration}}' 
                 durTime='{{song.duration}}' 
                 curTime='{{curTime}}'
+                bind:moveEvent='_progressMove'
                 bind:seekEvent='_seek'></progress>
       </view>
       <view class='edit'>

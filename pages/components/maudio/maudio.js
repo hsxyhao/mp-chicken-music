@@ -32,7 +32,8 @@ Component({
    */
   data: {
     show:false,
-    wrapper:null
+    wrapper:null,
+    maskWrapper: null
   },
   ready: function () {
 
@@ -58,30 +59,39 @@ Component({
       })
     },
     show: function () {
-      this.setData({
-        show:true
-      });
       var that = this;
+      that.setData({
+        show: true
+      });
       this._queryHeight(function (h) {
-        let anima = that._createAnimation(300, 0);
-        anima.translate3d(0, -h, 0).opacity(1).step();
+
+        let maskWrapper = that._createAnimation(800, 0, 'linear');
+        maskWrapper.opacity(1).step();
+        let anima = that._createAnimation(800, 0, 'linear');
+        anima.translate3d(0, -h, 0).step();
+
         that.setData({
-          wrapper: anima.export()
+          wrapper: anima.export(),
+          maskWrapper: maskWrapper.export()
         });
       })
     },
     hide: function () {
       var that = this;
-      let anima = that._createAnimation(300, 0);
-      anima.translate3d(0, 0, 0).opacity(0).step();
+      let anima = that._createAnimation(500, 0, 'linear');
+      anima.translate3d(0, 0, 0).step();
+      let maskWrapper = that._createAnimation(500, 0, 'linear');
+      maskWrapper.opacity(0).step();
+
       that.setData({
-        wrapper: anima.export()
+        wrapper: anima.export(),
+        maskWrapper: maskWrapper.export()
       });
       setTimeout(function () {
         that.setData({
           show: false
         });
-      }, 300);
+      }, 500);
     },
     showPlay: function(e) {
       this.triggerEvent("showPlayEvent")
