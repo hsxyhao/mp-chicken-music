@@ -4,6 +4,13 @@ const Mode = function (code, font, desc) {
   this.desc = desc;
 }
 
+function rnd(n, m) {
+  if (n > m) {
+    return null;
+  }
+  return Math.floor(Math.random() * (m - n + 1) + n);
+}
+
 const chageMode = function (code) {
   code = ++code % 3;
   let target = null;
@@ -31,23 +38,22 @@ const PLAYMODE = {
 }
 
 function _randomList(list) {
-  if (!list || list.length <= 0) {
-    return null;
+  if (!list || list.length <= 1) {
+    return list;
   }
   let ret = list.slice();
-  console.log(`before: ${ret}`)
   let length = ret.length * 0.5;
   for (let i = 0; i < length; ) {
-    let random1 = Math.floor(Math.random() * 10 * ret.length);
-    let random2 = Math.floor(Math.random() * 10 * ret.length);
+    let random1 = rnd(0, ret.length - 1);
+    let random2 = rnd(0, ret.length - 1);
     if (random1 !== random2) {
       i++;
       let temp = ret[random1];
       ret[random1] = ret[random2];
       ret[random2] = temp;
-    }
+    } 
   }
-  console.log(`after: ${ret}`)
+  console.log(ret)
   return ret;
 }
 
@@ -103,7 +109,7 @@ PlayList.prototype.addSong = function (song) {
   this.list.push(song);
   this.currentSong = song;
   this.length = this.list.length;
-  this.sequenceList = _randomList(this.list);
+  this.randomList = _randomList(this.list);
   return true;
 }
 

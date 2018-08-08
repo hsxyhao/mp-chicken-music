@@ -156,6 +156,7 @@ Page({
   _playMusic: function (song, show) {
     getMusicVKey(song.mid, (u) => {
       song.url = u; 
+      this.play.lyricStop();
       this.setData({
         'song': song,
         'mini': true,
@@ -164,10 +165,6 @@ Page({
       this.audio.newPlay(song);
       if (show) {
         this.play.show();
-      }
-      if (song && !song.lyric) {
-        this._lyricInit(song)
-        console.log(song)
       }
     })
   },
@@ -210,22 +207,29 @@ Page({
   },
   changeMode: function (e) {
     let mode = chageMode(this.data.playlist.playMode.code);
-    console.log(mode)
     this.setData({
       'playlist.playMode': mode
     })
   },
+  _changeSong: function (song) {
+    let current = this.data.song;
+    if (song.mid === current.mid) {
+      return;
+    }
+    this.play.lyricStop();
+    this._playMusic(song, false);
+    this.play._lyricInit(song);
+  },
   switchSong: function (e) {
     let song = e.detail.song;
-    this.setData({
-      'song': song
-    })
-    this._playMusic(song,false)
+    this._changeSong(song)
   },
   prev: function () {
-
+    let song = this.data.playlist.getNextSong();
+    this._changeSong(song)
   },
   next: function () {
-
+    let song = this.data.playlist.getNextSong();
+    this._changeSong(song)
   }
 })

@@ -184,10 +184,13 @@ Component({
       });
       if (this.data.song && !this.data.song.lyric) {
         this._lyricInit(this.data.song)
-      } else {
-        let song = this.data.song;
-        song.lyric.seek(this.data.curTime * 1000);
-        !this.data.isPlaying && song.lyric.stop();
+      }
+    },
+    lyricStop: function () {
+      let song = this.data.song;
+      if (song) {
+        let lyric = song.lyric;
+        lyric.stop()
       }
     },
     _lyricInit: function (song) {
@@ -195,7 +198,7 @@ Component({
       getLyric(song.mid).then((res) => {
         var ret = res;
         if (typeof ret === 'string') {
-          var reg = /^\w+\(({[^()]+})\)$/ // 用来匹配 jsonp 字符串
+          var reg = /^\w+\(({[^()]+})\)$/ 
           var matches = ret.match(reg)
           if (matches) {
             ret = JSON.parse(matches[1])
@@ -214,7 +217,7 @@ Component({
               'song.lyric': lyric
             })
             if (that.data.isPlaying) {
-              that.data.song.lyric.play(that.data.curTime * 1000)
+              that.data.song.lyric.play()
             }
           }
         }
