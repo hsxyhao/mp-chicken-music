@@ -1,5 +1,0 @@
-{
-    "usingComponents": {
-      "add-song": "../components/addsong/addsong"
-    }
-}

@@ -264,11 +264,13 @@ Component({
       this.setData({
         'search.query': val
       })
+      this.searchMusic();
     },
     input: function (e) {
       this.setData({
         'search.query': e.detail.value
       })
+      this.searchMusic();
     },
     searchMusic: function () {
       let query = this.data.search.query;

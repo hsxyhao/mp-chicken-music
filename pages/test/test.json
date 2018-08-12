@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "mini-audio": "../components/maudio/maudio",
-    "header": "../components/header/header",
-    "nav": "../components/nav/nav",
-    "container": "../components/container/container"
-  }
-}
