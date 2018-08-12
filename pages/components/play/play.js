@@ -188,9 +188,8 @@ Component({
     },
     lyricStop: function () {
       let song = this.data.song;
-      if (song) {
-        let lyric = song.lyric;
-        lyric.stop()
+      if (song && song.lyric) {
+        song.lyric.stop()
       }
     },
     _lyricInit: function (song) {
@@ -279,9 +278,9 @@ Component({
         return;
       }
       if (this.data.isPlaying) {
-        lyric.play(this.data.curTime * 1000)
+        lyric.play(this.data.curTime * 1000);
       } else {
-        lyric.stop()
+        this.lyricStop();
       }
     }
   }

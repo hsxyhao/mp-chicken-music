@@ -89,19 +89,6 @@ Page({
   zhidaClick: function (e) {
     this._singerDetail(e.detail.singer);
   },
-  searchClick: function (e) {
-    let song = e.detail.song;
-    this.setData({
-      'song': song,
-      'mini': true,
-      'state': true
-    });
-    let playlist = this.data.playlist;
-    if (playlist.addSong(song)) {
-      playlist.updatewWxml(this, 'playlist.list');
-    }
-    this._playMusic(song,true);
-  },
   recomDetail: function (e) {
     let song = e.detail.song;
     var that = this;
@@ -155,13 +142,14 @@ Page({
   },
   _playMusic: function (song, show) {
     getMusicVKey(song.mid, (u) => {
-      song.url = u; 
-      this.play.lyricStop();
+      console.log(song)
+      song.url = u;
       this.setData({
         'song': song,
         'mini': true,
         'state': true
       });
+      this.play.lyricStop();
       this.audio.newPlay(song);
       if (show) {
         this.play.show();

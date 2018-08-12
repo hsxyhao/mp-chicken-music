@@ -3,12 +3,11 @@
   <nav id='nav' bind:switchEvent="switchContainer" style='position:relative;z-index:180;'></nav>
   <view class='container-box'>
     <container id="container"
-      bind:searchClickEvent='playMusic' 
       bind:topListDetailEvent='topListDetail'
       bind:recomDetailEvent='recomDetail'
       bind:singerDetailEvent='singerDetail' 
       bind:zhidaClickEvent='zhidaClick'
-      bind:searchClickEvent='searchClick'
+      bind:searchClickEvent='playMusic' 
       bind:moveEvevnt="moveEvevnt"></container>
   </view>
   <singer-details
