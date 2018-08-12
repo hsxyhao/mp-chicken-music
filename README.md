@@ -4,7 +4,7 @@
 
 ## ÏîÄ¿ÑİÊ¾
 
-![image](http://39.108.211.5:12345/imgs/mp/chicken_music.gif?raw=true)
+![image](static/imgs/chicken_music.gif)
 
 ## ½éÉÜ
 
