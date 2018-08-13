@@ -42,6 +42,7 @@ Component({
     isLike: false,
     isTouch: false,
     posX: 0,
+    posY: 0,
     showPlay:false,
     transform: '',
     cssStyle: '',
@@ -68,24 +69,31 @@ Component({
   methods: {
     touchstart: function (e) {
       this.data.posX = e.touches[0].clientX;
+      this.data.posY = e.touches[0].clientY;
     },
     touchmove: function (e) {
       let x = e.touches[0].clientX;
+      let y = e.touches[0].clientY;
       let disX = x - this.data.posX;
-      if (Math.abs(disX) > 60) {
-        if (disX > 60) {
-          this.setData({
-            transform: 'transform: translate3d(0px, 0px, 0px);transition-duration: 500ms;',
-            cssStyle: 'opacity: 1;transition-duration: 500ms;',
-            allLyric: false
-          });
-        } else {
-          this.setData({
-            transform: 'transform: translate3d(-100%, 0px, 0px);transition-duration: 500ms;',
-            cssStyle: 'opacity: 0;transition-duration: 500ms;',
-            allLyric: true
-          });
+      let disY = y - this.data.posY;
+      if (Math.abs(disX) > Math.abs(disY)) {
+        if (Math.abs(disX) > 60) {
+            if (disX > 60) {
+              this.setData({
+                transform: 'transform: translate3d(0px, 0px, 0px);transition-duration: 500ms;',
+                cssStyle: 'opacity: 1;transition-duration: 500ms;',
+                allLyric: false
+              });
+            } else {
+              this.setData({
+                transform: 'transform: translate3d(-100%, 0px, 0px);transition-duration: 500ms;',
+                cssStyle: 'opacity: 0;transition-duration: 500ms;',
+                allLyric: true
+              });
+            }
         }
+      } else {
+        this.back();
       }
     },
     like: function () {

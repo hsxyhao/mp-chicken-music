@@ -65,9 +65,9 @@ Component({
       });
       this._queryHeight(function (h) {
 
-        let maskWrapper = that._createAnimation(800, 0, 'linear');
+        let maskWrapper = that._createAnimation(300, 0, 'linear');
         maskWrapper.opacity(1).step();
-        let anima = that._createAnimation(800, 0, 'linear');
+        let anima = that._createAnimation(400, 0, 'linear');
         anima.translate3d(0, -h, 0).step();
 
         that.setData({
@@ -78,9 +78,9 @@ Component({
     },
     hide: function () {
       var that = this;
-      let anima = that._createAnimation(500, 0, 'linear');
+      let anima = that._createAnimation(200, 0, 'linear');
       anima.translate3d(0, 0, 0).step();
-      let maskWrapper = that._createAnimation(500, 0, 'linear');
+      let maskWrapper = that._createAnimation(300, 0, 'linear');
       maskWrapper.opacity(0).step();
 
       that.setData({
@@ -102,7 +102,7 @@ Component({
     switchSong: function (e) {
       let i = e.currentTarget.dataset.i;
       let song = this.data.list[i];
-      if (!song||song.mid === this.data.song.mid) {
+      if (!song || song.mid === this.data.song.mid) {
         return;
       }
       this.triggerEvent("switchSongEvent", { song: song})

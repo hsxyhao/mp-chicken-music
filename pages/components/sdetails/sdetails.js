@@ -112,6 +112,8 @@ Component({
     show: function () {
       let show = createAnimation(200,0);
       show.translate3d('0',0,0).opacity(1).step();
+      this._scrollPullAnima(0, 0, 0);
+      this._imgScaleAima(0, 0, 1);
       this.setData({
         detailsAnima: show.export()
       })

@@ -144,12 +144,12 @@ Page({
     getMusicVKey(song.mid, (u) => {
       console.log(song)
       song.url = u;
+      this.play.lyricStop();
       this.setData({
         'song': song,
         'mini': true,
         'state': true
       });
-      this.play.lyricStop();
       this.audio.newPlay(song);
       if (show) {
         this.play.show();

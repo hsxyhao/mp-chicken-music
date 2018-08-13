@@ -7,7 +7,8 @@
   width: 100%;
   z-index: 400;
   overflow: hidden;
-  transform: translateX(100%)
+  transform: translateX(100%);
+  background: rgba(7,17,27,1);
 }
 
 .deatils-header {

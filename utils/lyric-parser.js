@@ -80,7 +80,6 @@ Lyric.prototype._playRest = function () {
   let delay = line.time - (+new Date() - this.startStamp)
 
   this.timer = setTimeout(() => {
-    console.log(`lyric setTimeout ${delay}`)
     this._callHandler(this.curNum++)
     if (this.curNum < this.lines.length && this.state === STATE_PLAYING) {
       this._playRest()

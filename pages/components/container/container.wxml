@@ -99,29 +99,31 @@
         </view>
       </view>
       <view class='shortcut-wrapper' style='z-index:10'>
-        <view class='shortcut-wrapper-item'>
-          <view class='title'>{{'热门搜索'}}</view>
-          <view class='search-content'>
-            <text class='search-text' 
-                  catchtap='searchClick'
-                  data-val='{{item.k}}' 
-                  wx:for='{{search.hotKeys}}'>{{item.k}}</text>
-          </view>
-        </view>
-        <view class='shortcut-wrapper-item'>
-          <view class='title clear'>
-            <text class=''>{{'搜索历史'}}</text>
-            <text class='icon-clear' bindtap='deleteAll'></text>
-          </view>
-          <view class='history-content'>
-            <view class='history-item' wx:for='{{search.history}}'>
-              <text class='history-text' 
-                    data-val='{{item.name}}' 
-                    catchtap='searchClick'>{{item.name}}</text>
-              <text class='icon-close' data-k='{{item.key}}' catchtap='close'></text>
+        <scroll-view class='search-scroll' scroll-y='{{true}}'>
+          <view class='shortcut-wrapper-item'>
+            <view class='title'>{{'热门搜索'}}</view>
+            <view class='search-content'>
+              <text class='search-text' 
+                    catchtap='searchClick'
+                    data-val='{{item.k}}' 
+                    wx:for='{{search.hotKeys}}'>{{item.k}}</text>
             </view>
           </view>
-        </view>
+          <view class='shortcut-wrapper-item'>
+            <view class='title clear'>
+              <text class=''>{{'搜索历史'}}</text>
+              <text class='icon-clear' bindtap='deleteAll'></text>
+            </view>
+            <view class='history-content'>
+              <view class='history-item' wx:for='{{search.history}}'>
+                <text class='history-text' 
+                      data-val='{{item.name}}' 
+                      catchtap='searchClick'>{{item.name}}</text>
+                <text class='icon-close' data-k='{{item.key}}' catchtap='close'></text>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
       </view>
       <view class='shortcut-wrapper' style='{{search.query===""?"":"z-index:100;"}}'>
         <scroll-view class='search-scroll' scroll-y='{{true}}'>

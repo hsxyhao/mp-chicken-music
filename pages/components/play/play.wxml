@@ -10,7 +10,7 @@
       <text class='song-singer'>{{song.singer}}</text>
       <text class='icon-back' bindtap='back'></text>
     </view>
-    <view class='body'bindtouchstart='touchstart' bindtouchmove='touchmove'>
+    <view class='body' catchtouchstart='touchstart' catchtouchmove='touchmove'>
       <view class='relative'>
         <view class='body-style-one' style='{{cssStyle}}'>
           <view class='body-img' id='body_img' animation='{{animations.center}}' id='song_img'>
